@@ -1,2 +1,2 @@
-time
-machine
+micropython-time
+micropython-machine
