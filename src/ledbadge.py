@@ -67,7 +67,7 @@ class RotatingPlasmaDemo(DemoBase):
         self.current = time.ticks_us() / 1000000
 
     def handle_px(self, x, y):
-        v = math.sin(1 * (0.5 * x * math.sin(self.current / 2) +
+        v = math.sin(3 * (0.5 * x * math.sin(self.current / 2) +
                      0.5 * y * math.cos(self.current / 3)) + self.current)
         # -1 < sin() < +1
         # therfore correct the value and bring into range [0, 1]
@@ -212,7 +212,7 @@ def run_plasma_demo():
 
 def main():
     print("starting in some seconds")
-    time.sleep(3)
+    time.sleep(1)
     print("starting led badge")
 
     run_rorating_plasma()
