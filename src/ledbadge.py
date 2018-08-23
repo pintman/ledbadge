@@ -4,6 +4,30 @@ from machine import Pin
 import math
 import urandom
 
+# TODO add text output
+# use font.h from blinkenrocket/firmware
+# https://github.com/blinkenrocket/firmware/blob/cd32abec64bd5c5d1606c54272d91b39328efff6/src/font.h
+# format: First: number of columns, following bit representation of char
+"""
+eight = [0x05,0x36,0x49,0x49,0x49,0x36]
+at = [0x07,0x3E,0x41,0x49,0x55,0x5D,0x45,0x38]
+x = [0x05,0x11,0x0A,0x04,0x0A,0x11]
+space = [0x03,0x00,0x00,0x00]
+excl =[0x01,0x7D]
+bigA = [0x05,0x3F,0x48,0x48,0x48,0x3F]
+
+for sign in [eight, x, space, excl, bigA]:
+    for ch in sign:
+        s = bin(ch)[2:]
+        s = s.zfill(8)
+        s = s.replace("0", " ")
+        s = s.replace("1", ".")
+        print(s, ch)
+
+    print()
+
+"""
+
 
 class LedMatrix:
     def __init__(self):
