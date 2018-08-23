@@ -3,6 +3,7 @@ import tm1640
 from machine import Pin
 import math
 import urandom
+import font
 
 # TODO add text output
 # use font.h from blinkenrocket/firmware
@@ -34,19 +35,46 @@ class LedMatrix:
         self.width = 8
         self.height = 8
         self.tm = tm1640.TM1640(clk=Pin(14), dio=Pin(13))
-        self.buffer = [0] * 8
+        self._buffer = [0] * 8
 
     def px(self, x, y, val):
         assert 0 <= x <= self.width
         assert 0 <= y <= self.height
 
         if val:
-            self.buffer[y] = self.buffer[y] | 2**x
+            self._buffer[y] = self._buffer[y] | 2**x
         else:
-            self.buffer[y] = self.buffer[y] & ~(2**x)
+            self._buffer[y] = self._buffer[y] & ~(2**x)
 
     def show(self):
-        self.tm.write(self.buffer)
+        self.tm.write(self._buffer)
+
+    def scroll(self, fill=0):
+        """Scroll content and fill with the given byte."""
+        self._buffer = self._buffer[:-1]
+        self._buffer = [0] + self._buffer
+        self._buffer[0] = fill
+
+
+class TextScroller:
+    def __init__(self, matrix):
+        self.matrix = matrix
+
+    def scroll_text(self, text, wait_time=0.08):
+        """Scroll text with wait_time seconds between updates."""
+        for ch in text:
+            ascii_ch = ord(ch)
+            # first entry contains length - ignoring this
+            data = font.char[ascii_ch][1:]
+
+            for dat in data:
+                # replace last entry after scroll
+                self.matrix.scroll(fill=dat)
+                self.matrix.show()
+
+                time.sleep(wait_time)
+
+            self.matrix.scroll()  # add some extra space
 
 
 class DemoBase:
@@ -188,7 +216,7 @@ def run_pingpong_demo():
     PingPong(mat).run()
 
 
-def run_rorating_plasma():
+def run_rotating_plasma():
     RotatingPlasmaDemo(LedMatrix()).run()
 
 
@@ -234,12 +262,18 @@ def run_plasma_demo():
     PlasmaDemo(LedMatrix()).run()
 
 
+def test_text_scroller():
+    TextScroller(LedMatrix()).scroll_text("hallo welt 42!")
+
+
 def main():
     print("starting in some seconds")
     time.sleep(1)
     print("starting led badge")
 
-    run_rorating_plasma()
+    TextScroller(LedMatrix()).scroll_text("It's demo time... :) ...   ")
+    # test_text_scroller()
+    run_rotating_plasma()
     #run_pingpong_demo()
     #run_game_of_life()
     #run_plasma_demo()
