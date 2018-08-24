@@ -1,3 +1,5 @@
 # ledbadge
 
-Look into the [ledbadge notebook](ledbadge.ipynb) for further instructions.
+Look into the 
+[ledbadge notebook](http://nbviewer.jupyter.org/github/pintman/ledbadge/blob/master/ledbadge.ipynb) 
+for further instructions.
