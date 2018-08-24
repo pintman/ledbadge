@@ -2,7 +2,7 @@ import time
 import math
 import urandom
 from ledmatrix import LedMatrix
-from font import TextScroller
+from text import TextScroller
 
 
 class DemoBase:
