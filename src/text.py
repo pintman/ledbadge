@@ -110,10 +110,8 @@ class TextScroller:
         """Scroll text with wait_time seconds between updates."""
         for ch in text:
             ascii_ch = ord(ch)
-            # first entry contains length - ignoring this
-            data = _font[ascii_ch][1:]
 
-            for dat in data:
+            for dat in _font[ascii_ch]:
                 self.matrix.scroll(fill=dat)
                 self.matrix.show()
                 time.sleep(wait_time)
