@@ -2,9 +2,9 @@
 #import esp
 #esp.osdebug(None)
 import gc
-import ledbadge
+import main
 #import webrepl
 #webrepl.start()
 gc.collect()
 
-ledbadge.main()
+main.main()
