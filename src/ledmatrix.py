@@ -23,6 +23,4 @@ class LedMatrix:
 
     def scroll(self, fill=0):
         """Scroll content and fill with the given byte."""
-        self._buffer = self._buffer[:-1]
-        self._buffer = [0] + self._buffer
-        self._buffer[0] = fill
+        self._buffer = [fill] + self._buffer[:-1]
