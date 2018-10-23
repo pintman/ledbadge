@@ -37,9 +37,9 @@ D4 = 2
 # D8 = 15
 
 joy = Joystick(
-    w=Pin(D1, mode=Pin.IN, pull=Pin.PULL_UP),
-    a=Pin(D2, mode=Pin.IN, pull=Pin.PULL_UP),
-    s=Pin(D3, mode=Pin.IN, pull=Pin.PULL_UP),
+    w=Pin(D0, mode=Pin.IN, pull=Pin.PULL_UP),
+    a=Pin(D1, mode=Pin.IN, pull=Pin.PULL_UP),
+    s=Pin(D2, mode=Pin.IN, pull=Pin.PULL_UP),
     d=Pin(D4, mode=Pin.IN, pull=Pin.PULL_UP),
-    btn=Pin(D0, mode=Pin.IN)
+    btn=Pin(D3, mode=Pin.IN)
 )
