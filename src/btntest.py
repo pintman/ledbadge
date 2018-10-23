@@ -16,11 +16,11 @@ def show_direction(wasd):
     offset = 4
 
     if wasd == 'w':
-        matrix.px(offset, 0, True)
+        matrix.px(offset, matrix.height - 1, True)
     elif wasd == 'a':
         matrix.px(0, offset, True)
     elif wasd == 's':
-        matrix.px(offset, matrix.height - 1, True)
+        matrix.px(offset, 0, True)
     elif wasd == 'd':
         matrix.px(matrix.width - 1, offset, True)
 
