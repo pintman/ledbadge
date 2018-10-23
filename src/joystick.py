@@ -14,13 +14,13 @@ class Joystick:
 
     def btn_pressed(self):
         'Return whether button is pressed.'
-        return self.btn.value() == 1
+        return self.btn.value() == 0
 
     def direction(self):
         'get the current direction. One of w, a, s, d or None.'
 
         for wasd in self.directions:
-            if self.directions[wasd].value():
+            if self.directions[wasd].value() == 0:
                 return wasd
 
         # no pressed direction found
