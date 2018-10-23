@@ -22,5 +22,9 @@ class LedMatrix:
         self.tm.write(self._buffer)
 
     def scroll(self, fill=0):
-        """Scroll content and fill with the given byte."""
+        'Scroll content and fill with the given byte.'
         self._buffer = [fill] + self._buffer[:-1]
+
+    def clear(self):
+        'Clear the matrix screen buffer'
+        self._buffer = [0] * 8
