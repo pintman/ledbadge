@@ -1,31 +1,43 @@
-from machine import Pin
 import time
+import ledmatrix
+import joystick
 
-# GPIO pin numbers
-D0 = 16
-D1 = 5
-D2 = 4
-D3 = 0
-D4 = 2
-D6 = 12
-D8 = 15
 
-pins = [
-    Pin(D8, mode=Pin.IN, pull=Pin.PULL_UP),
-    Pin(D1, mode=Pin.IN, pull=Pin.PULL_UP),
-    Pin(D2, mode=Pin.IN, pull=Pin.PULL_UP),
-    Pin(D3, mode=Pin.IN, pull=Pin.PULL_UP),
-    Pin(D4, mode=Pin.IN, pull=Pin.PULL_UP),
-]
+matrix = ledmatrix.LedMatrix()
+SLEEP_TIME = 0.01  # secconds betweent updates
+
+
+def show_btn_pressed():
+    matrix.px(3, 3, True)
+
+
+def show_direction(wasd):
+    ''
+    offset = 4
+
+    if wasd == 'w':
+        matrix.px(offset, 0, True)
+    elif wasd == 'a':
+        matrix.px(0, offset, True)
+    elif wasd == 's':
+        matrix.px(offset, matrix.height - 1, True)
+    elif wasd == 'd':
+        matrix.px(matrix.width - 1, offset, True)
 
 
 def main():
     print("Running pin test")
     while True:
-        s = ''
-        for p in pins:
-            s += str(p.value()) + ' '
+        matrix.clear()
 
-        print(s)
+        if joystick.joy.btn_pressed():
+            show_btn_pressed()
+            print('Button pressed')
 
-        time.sleep(0.5)
+        direction = joystick.joy.direction()
+        print('Direction:', direction)
+        show_direction(direction)
+
+        matrix.show()
+
+        time.sleep(SLEEP_TIME)
