@@ -7,9 +7,11 @@ D1 = 5
 D2 = 4
 D3 = 0
 D4 = 2
+D6 = 12
+D8 = 15
 
 pins = [
-    Pin(D0, mode=Pin.IN, pull=Pin.PULL_UP),
+    Pin(D8, mode=Pin.IN, pull=Pin.PULL_UP),
     Pin(D1, mode=Pin.IN, pull=Pin.PULL_UP),
     Pin(D2, mode=Pin.IN, pull=Pin.PULL_UP),
     Pin(D3, mode=Pin.IN, pull=Pin.PULL_UP),
@@ -26,4 +28,4 @@ def main():
 
         print(s)
 
-    time.sleep(1)
+        time.sleep(0.5)
