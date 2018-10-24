@@ -8,10 +8,12 @@ B is information whether button is pressed (1) or not (0)
 
 import pygame
 import socket
+import config
 
-HOST = "localhost"
-PORT = 1234
+HOST = config.PYGAME_NETWORK_JOYSTICK_HOST
+PORT = config.NETWORK_JOYSTICK_PORT
 
+print("Sending joystick information to", HOST, PORT)
 sock = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 sock.connect((HOST, PORT))
 
