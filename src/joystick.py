@@ -27,19 +27,14 @@ class Joystick:
         return None
 
 
-# GPIO pin numbers
-D0 = 16
-D1 = 5
-D2 = 4
-D3 = 0
-D4 = 2
-# D6 = 12
-# D8 = 15
+# GPIO pin numbers (https://wiki.wemos.cc/products:d1:d1_mini)
+_D = [16, 5, 4, 0, 2, 14, 12, 13, 15]
 
 joy = Joystick(
-    w=Pin(D0, mode=Pin.IN),
-    a=Pin(D1, mode=Pin.IN, pull=Pin.PULL_UP),
-    s=Pin(D2, mode=Pin.IN, pull=Pin.PULL_UP),
-    d=Pin(D4, mode=Pin.IN, pull=Pin.PULL_UP),
-    btn=Pin(D3, mode=Pin.IN, pull=Pin.PULL_UP)
+    # no pull up for D0 allowed. Needs external pull-up
+    w=Pin(_D[0], mode=Pin.IN),
+    a=Pin(_D[1], mode=Pin.IN, pull=Pin.PULL_UP),
+    s=Pin(_D[2], mode=Pin.IN, pull=Pin.PULL_UP),
+    d=Pin(_D[4], mode=Pin.IN, pull=Pin.PULL_UP),
+    btn=Pin(_D[3], mode=Pin.IN, pull=Pin.PULL_UP)
 )
