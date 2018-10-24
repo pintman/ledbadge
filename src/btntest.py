@@ -7,12 +7,11 @@ matrix = ledmatrix.LedMatrix()
 SLEEP_TIME = 0.01  # secconds betweent updates
 
 
-def show_btn_pressed():
+def _show_btn_pressed():
     matrix.px(3, 3, True)
 
 
-def show_direction(wasd):
-    ''
+def _show_direction(wasd):
     offset = 4
 
     if wasd == 'w':
@@ -31,12 +30,12 @@ def main():
         matrix.clear()
 
         if joystick.joy.btn_pressed():
-            show_btn_pressed()
+            _show_btn_pressed()
             print('Button pressed')
 
         direction = joystick.joy.direction()
         print('Direction:', direction)
-        show_direction(direction)
+        _show_direction(direction)
 
         matrix.show()
 
