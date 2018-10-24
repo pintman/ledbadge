@@ -20,6 +20,14 @@ def do_connect():
             pass
     print('network config:', sta_if.ifconfig())
 
+
 do_connect()
+
+#print('Starting network joystick')
+#import network_joystick
+#network_joystick.main()
+
+#import snake
+#snake.main()
 
 main.main()
