@@ -4,7 +4,7 @@ import joystick
 
 
 matrix = ledmatrix.LedMatrix()
-SLEEP_TIME = 0.01  # secconds betweent updates
+SLEEP_TIME = 0.01  # secconds between updates
 
 
 def _show_btn_pressed():
