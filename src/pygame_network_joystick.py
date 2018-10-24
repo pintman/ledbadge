@@ -10,7 +10,7 @@ import pygame
 import socket
 import config
 
-HOST = config.PYGAME_NETWORK_JOYSTICK_HOST
+HOST = config.NETWORK_JOYSTICK_HOST
 PORT = config.NETWORK_JOYSTICK_PORT
 
 print("Sending joystick information to", HOST, PORT)
