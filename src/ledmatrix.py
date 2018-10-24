@@ -3,11 +3,11 @@ from machine import Pin
 
 
 class LedMatrix:
-    def __init__(self):
-        self.width = 8
-        self.height = 8
-        self.tm = tm1640.TM1640(clk=Pin(14), dio=Pin(13))
-        self._buffer = [0] * 8
+    def __init__(self, border_length=8, clkpin=14, diopin=13):
+        self.width = border_length
+        self.height = border_length
+        self.tm = tm1640.TM1640(clk=Pin(clkpin), dio=Pin(diopin))
+        self._buffer = [0] * border_length
 
     def px(self, x, y, val):
         'Set pixel at x,y to be on or off. Needs invocation of show afterwards.'
