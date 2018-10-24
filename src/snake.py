@@ -1,6 +1,8 @@
-import joystick
 import uos
 import ledmatrix
+import uasyncio as asyncio
+import network_joystick as joystick
+# import joystick
 
 
 class SnakeGame:
@@ -18,17 +20,19 @@ class SnakeGame:
         self.joystick = joystick
         self.reset()
 
-    def run(self):
+    async def as_run(self):
+        print("Starting snake game")
         while True:
             self.prepare()
             self.handle_input()
             self.update_screen()
 
             self.matrix.show()
+            await asyncio.sleep_ms(10)
 
     def reset(self):
         self.snake_body = SnakeGame.INIT_SNAKE_BODY
-        self.snake_direction = SnakeGame.INIT_giSNAKE_DIRECTION
+        self.snake_direction = SnakeGame.INIT_SNAKE_DIRECTION
         for _i in range(self.max_pills):
             self.create_new_pill()
 
@@ -93,4 +97,9 @@ class SnakeGame:
 def main():
     matrix = ledmatrix.LedMatrix()
     game = SnakeGame(matrix=matrix, joystick=joystick.joy)
-    game.run()
+
+    loop = asyncio.get_event_loop()
+    loop.create_task(joystick.as_handle_udp_packets())
+    loop.create_task(game.as_run())
+    loop.run_forever()
+
