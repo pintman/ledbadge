@@ -31,6 +31,7 @@ class SnakeGame:
             await asyncio.sleep_ms(10)
 
     def reset(self):
+        print('Resetting game')
         self.snake_body = SnakeGame.INIT_SNAKE_BODY
         self.snake_direction = SnakeGame.INIT_SNAKE_DIRECTION
         for _i in range(self.max_pills):
