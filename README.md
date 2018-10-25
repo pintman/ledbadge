@@ -9,3 +9,7 @@ for further instructions.
 - An OLED Shield can be integraded as well using the 
 [ssd1306](https://micropython-on-wemos-d1-mini.readthedocs.io/en/latest/shields.html#oled) 
 package.
+- Maybe change LedMatrix zu FrameBuffer
+  http://docs.micropython.org/en/latest/library/framebuf.html
+- Add schematic
+- Make an emulator

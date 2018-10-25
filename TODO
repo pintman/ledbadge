@@ -1,9 +1,0 @@
-- Maybe change LedMatrix zu FrameBuffer
-  http://docs.micropython.org/en/latest/library/framebuf.html
-- Add schematic
-- make emulator
-- add sample game like snake
-  https://github.com/tbs1-bo/flipflapflop/blob/master/demos.py#L232
-  or flappy dot
-  https://github.com/tbs1-bo/flipflapflop/blob/master/demos.py#L325
-  
