@@ -37,12 +37,13 @@ def handle_events(joystick):
 
         if event.type == pygame.JOYBUTTONDOWN:
             button_pressed = True
+        if event.type == pygame.JOYBUTTONUP:
+            button_pressed = False
 
-        if direction is not None or button_pressed:
-            try:
-                send_joystick_data(direction, button_pressed)
-            except Exception as e:
-                print(e)
+        try:
+            send_joystick_data(direction, button_pressed)
+        except Exception as e:
+            print(e)
 
 
 def send_joystick_data(direction, btn_pressed):
