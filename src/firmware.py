@@ -28,7 +28,8 @@ class Menu(utaskmanager.Task):
         wasd = self.joystick.direction()
         self._handle_input(wasd, self.joystick.btn_pressed())
         self.matrix.clear()
-        self.matrix.px(self.selected_option,0, True)
+        opt = self.options[self.selected_option]
+        self.matrix.write_char(opt)
         self.matrix.show()
 
     def _handle_input(self, wasd, btn_pressed):
