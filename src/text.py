@@ -117,3 +117,7 @@ class TextScroller:
                 time.sleep(wait_time)
 
             self.matrix.scroll()  # add some extra space
+
+
+def buffer_for_char(char):
+    return _font[ord(char)]
