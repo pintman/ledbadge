@@ -3,15 +3,17 @@ import ledmatrix
 import uasyncio as asyncio
 import network_joystick as joystick
 # import joystick
+import utaskmanager
 
 
-class SnakeGame:
+class SnakeGame(utaskmanager.Task):
     """Snake Game. Controlled with an attached Joystick."""
 
     INIT_SNAKE_BODY = [(3, 1), (2, 1), (1, 1)]
     INIT_SNAKE_DIRECTION = [1, 0]
 
     def __init__(self, matrix, joystick):
+        super().__init__()
         self.matrix = matrix
         self.snake_body = SnakeGame.INIT_SNAKE_BODY
         self.snake_direction = SnakeGame.INIT_SNAKE_DIRECTION
@@ -21,24 +23,19 @@ class SnakeGame:
             self.create_new_pill()
 
         self.joystick = joystick
-        self.game_running = False
 
-    async def as_run(self):
-        print("Starting snake game")
-        self.game_running = True
-        while self.game_running:
-            self.prepare()
-            self.handle_input()
-            self.update_screen()
+    def task_step(self):    
+        self.prepare()
+        self.handle_input()
+        self.update_screen()
 
-            self.matrix.show()
-            await asyncio.sleep_ms(10)
+        self.matrix.show()
 
     def prepare(self):
         self.move_snake()
         if len(self.snake_body) != len(set(self.snake_body)):
             # snake eats itself
-            self.game_running = False
+            self.task_running = False
 
         # if pills have been eaten, fill up with new ones
         while len(self.pills) <= self.max_pills:
