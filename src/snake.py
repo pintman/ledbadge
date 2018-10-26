@@ -1,8 +1,4 @@
 import uos
-import ledmatrix
-import uasyncio as asyncio
-import network_joystick as joystick
-# import joystick
 import utaskmanager
 
 
@@ -87,13 +83,3 @@ class SnakeGame(utaskmanager.Task):
             for y in range(self.matrix.height):
                 val = (x, y) in self.snake_body or (x, y) in self.pills
                 self.matrix.px(x, y, val)
-
-
-def main():
-    matrix = ledmatrix.LedMatrix()
-    game = SnakeGame(matrix=matrix, joystick=joystick.joy)
-
-    loop = asyncio.get_event_loop()
-    loop.create_task(joystick.as_handle_udp_packets())
-    loop.create_task(game.as_run())
-    loop.run_forever()

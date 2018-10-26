@@ -48,8 +48,6 @@ class Menu(utaskmanager.Task):
             game = snake.SnakeGame(self.matrix, self.joystick)
             utaskmanager.add_task(game)
             self.current_task = game
-            # await game.as_run()            
-            #asyncio.get_event_loop().create_task(game.as_run())
 
 
 def start():
