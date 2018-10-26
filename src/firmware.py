@@ -18,11 +18,11 @@ class Menu(utaskmanager.Task):
         self.matrix = matrix
         self.selected_option = 0
         self.joystick = jostick
-        self.hidden = False
-        self.current_program = None
+        self.current_task= None
 
     def task_step(self):
-        if self.hidden:
+        # do nothing if a task is currently running
+        if self.current_task is not None and self.current_task.task_running:
             return
 
         wasd = self.joystick.direction()
@@ -45,8 +45,10 @@ class Menu(utaskmanager.Task):
         if self.options[self.selected_option] == 'S':
             self.hidden = True
             game = snake.SnakeGame(self.matrix, self.joystick)
+            utaskmanager.add_task(game)
+            self.current_task = game
             # await game.as_run()            
-            asyncio.get_event_loop().create_task(game.as_run())
+            #asyncio.get_event_loop().create_task(game.as_run())
 
 
 def start():
