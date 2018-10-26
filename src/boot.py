@@ -2,7 +2,6 @@
 #import esp
 #esp.osdebug(None)
 import gc
-import main
 import config
 #import webrepl
 #webrepl.start()
@@ -30,4 +29,8 @@ do_connect()
 #import snake
 #snake.main()
 
+#import firmware
+#firmware.start()
+
+import main
 main.main()
