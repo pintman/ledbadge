@@ -1,9 +1,10 @@
-import uasyncio as asyncio
+import network
 
 import utaskmanager
 import config
 import snake
 import ledmatrix
+import text
 
 if config.USE_NETWORK_JOYSTICK:
     import network_joystick as joystick
@@ -14,7 +15,7 @@ else:
 class Menu(utaskmanager.Task):
     def __init__(self, matrix, jostick):
         super().__init__()
-        self.options = ["S", "C"]
+        self.options = ["S", "i"]
         self.matrix = matrix
         self.selected_option = 0
         self.joystick = jostick
@@ -33,21 +34,29 @@ class Menu(utaskmanager.Task):
         self.matrix.show()
 
     def _handle_input(self, wasd, btn_pressed):
+        num_options = len(self.options)
         if wasd == 'a':
-            self.selected_option = max(0, self.selected_option - 1)
+            self.selected_option = (self.selected_option + 1) % num_options
         elif wasd == 'd':
-            self.selected_option = min(len(self.options)-1, 
-                                       self.selected_option + 1)
+            self.selected_option = (self.selected_option - 1) % num_options
+
         if btn_pressed:
             self._select_current_option()
 
     def _select_current_option(self):
-        print("Selected", self.options[self.selected_option])
-        if self.options[self.selected_option] == 'S':
+        option = self.options[self.selected_option]
+        print("Selected", option)
+        if option == 'S':
             self.hidden = True
             game = snake.SnakeGame(self.matrix, self.joystick)
             utaskmanager.add_task(game)
             self.current_task = game
+
+        elif option == 'i':
+            # show ip address
+            tc = text.TextScroller(self.matrix)
+            sta = network.WLAN(network.STA_IF)
+            tc.scroll_text(" IP: " + sta.ifconfig()[0] + "  ")
 
 
 def start():
