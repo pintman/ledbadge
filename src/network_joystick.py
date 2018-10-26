@@ -39,7 +39,8 @@ class NetworkedJoystick(utaskmanager.Task):
 
         print("received", dir_btn)
         dir_btn = str(dir_btn, "ascii")
-        self.set(dir_btn[0], dir_btn[1] == '1')
+        d = None if dir_btn[0] == '0' else dir_btn[0]
+        self.set(d, dir_btn[1] == '1')
 
     def btn_pressed(self):
         'Return whether button is pressed.'
