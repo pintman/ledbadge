@@ -17,12 +17,16 @@ class SnakeGame:
         self.snake_direction = SnakeGame.INIT_SNAKE_DIRECTION
         self.pills = []
         self.max_pills = self.matrix.width // 4
+        for _i in range(self.max_pills):
+            self.create_new_pill()
+
         self.joystick = joystick
-        self.reset()
+        self.game_running = False
 
     async def as_run(self):
         print("Starting snake game")
-        while True:
+        self.game_running = True
+        while self.game_running:
             self.prepare()
             self.handle_input()
             self.update_screen()
@@ -30,18 +34,11 @@ class SnakeGame:
             self.matrix.show()
             await asyncio.sleep_ms(10)
 
-    def reset(self):
-        print('Resetting game')
-        self.snake_body = SnakeGame.INIT_SNAKE_BODY
-        self.snake_direction = SnakeGame.INIT_SNAKE_DIRECTION
-        for _i in range(self.max_pills):
-            self.create_new_pill()
-
     def prepare(self):
         self.move_snake()
         if len(self.snake_body) != len(set(self.snake_body)):
             # snake eats itself
-            self.reset()
+            self.game_running = False
 
         # if pills have been eaten, fill up with new ones
         while len(self.pills) <= self.max_pills:
@@ -103,4 +100,3 @@ def main():
     loop.create_task(joystick.as_handle_udp_packets())
     loop.create_task(game.as_run())
     loop.run_forever()
-
