@@ -2,6 +2,9 @@
 Task manager for tasks that should run pseudo-parallel in micropython. 
 
 A demo application of this package is found inside the demo() method.
+
+Part of this code based on the tutorial about the uasyncio upy package found
+here: https://github.com/peterhinch/micropython-async/blob/master/TUTORIAL.md
 '''
 import uasyncio as asyncio
 
