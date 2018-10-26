@@ -56,9 +56,7 @@ def start():
     matrix = ledmatrix.LedMatrix()
     jstick = joystick.joy
     if config.USE_NETWORK_JOYSTICK:
-        # TODO make task from this
-        #utaskmanager.add_task(joystick.as_handle_udp_packets())
-        asyncio.get_event_loop().create_task(joystick.as_handle_udp_packets())
+        utaskmanager.add_task(joystick.joy)
 
     utaskmanager.add_task(Menu(matrix, jstick))
 
