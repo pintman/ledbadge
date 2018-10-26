@@ -58,7 +58,7 @@ async def as_handle_udp_packets():
         print("received", dir_btn)
         dir_btn = str(dir_btn, "ascii")
         joy.set(dir_btn[0], dir_btn[1] == '1')
-        await asyncio.sleep_ms(10)
+        await asyncio.sleep_ms(5)
 
 
 def main():
