@@ -7,6 +7,9 @@ import config
 #webrepl.start()
 gc.collect()
 
+# import text with early on due to memory fragmentation
+# https://forum.micropython.org/viewtopic.php?p=28225&sid=3c4da4dea626437868dbbc8847133d97#p28225
+import text
 
 def do_connect():
     import network
