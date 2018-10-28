@@ -1,5 +1,7 @@
 import time
 
+import utaskmanager
+
 # taken from
 # https://github.com/blinkenrocket/firmware/tree/master/src/font.h
 # format: bit representation of character, column by column
@@ -117,6 +119,28 @@ class TextScroller:
                 time.sleep(wait_time)
 
             self.matrix.scroll()  # add some extra space
+
+
+class TextScrollerTask(utaskmanager.Task):
+    def __init__(self, matrix):
+        super().__init__()
+        self.matrix = matrix
+        self.textbuffer = []
+        self.current_index = 0
+        self.set_text('')
+
+    def set_text(self, new_text):
+        'change the currently shown text.'
+        self.textbuffer = []
+        for ch in new_text:
+            line = buffer_for_char(ch) + [0x00]
+            self.textbuffer.extend(line)
+
+    def task_step(self):
+        current_line = self.textbuffer[self.current_index]
+        self.matrix.scroll(fill=current_line)
+        self.current_index = (self.current_index + 1) % len(self.textbuffer)
+
 
 
 def buffer_for_char(char):
