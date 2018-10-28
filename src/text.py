@@ -128,7 +128,6 @@ class TextScrollerTask(utaskmanager.Task):
         self.textbuffer = []
         self.current_index = 0
         self._paused = False
-        self.set_text('')
 
     def pause(self, is_paused):
         '''
