@@ -32,8 +32,8 @@ do_connect()
 #import snake
 #snake.main()
 
-import firmware
-firmware.start()
+#import firmware
+#firmware.start()
 
-#import main
-#main.main()
+import main
+main.main()
