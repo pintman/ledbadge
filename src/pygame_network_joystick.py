@@ -47,17 +47,22 @@ def handle_keyboard_event(event):
     direction = None
     btn_pressed = False
 
-    if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_w:
-            direction = 'w'
-        elif event.key == pygame.K_a:
-            direction = 'a'
-        elif event.key == pygame.K_s:
-            direction = 's'
-        elif event.key == pygame.K_d:
-            direction = 'd'
-        elif event.key == pygame.K_e:
-            btn_pressed = True
+    if event.type in (pygame.KEYDOWN, pygame.KEYUP):
+
+        if event.type == pygame.KEYUP:
+            direction = None
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                direction = 'w'
+            elif event.key == pygame.K_a:
+                direction = 'a'
+            elif event.key == pygame.K_s:
+                direction = 's'
+            elif event.key == pygame.K_d:
+                direction = 'd'
+            elif event.key == pygame.K_e:
+                btn_pressed = True
 
         send_joystick_data(direction, btn_pressed)
 
