@@ -29,7 +29,9 @@ class Task:
     async def start(self):
         self.task_running = True
         while self.task_running:
-            self.task_step()
+            if not self._paused:
+                self.task_step()
+
             await asyncio.sleep_ms(Task.TASK_SLEEP_TIME_MS)
 
     def task_step(self):
