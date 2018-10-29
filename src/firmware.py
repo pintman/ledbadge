@@ -1,4 +1,5 @@
 import network
+import gc
 
 import utaskmanager
 import config
@@ -15,12 +16,13 @@ else:
 class Menu(utaskmanager.Task):
     def __init__(self, matrix, jostick):
         super().__init__()
-        self.options = ["S", "i"]
+        self.options = ["Snake", "net", "mem"]
         self.matrix = matrix
         self.selected_option = 0
         self.joystick = jostick
         self.current_task = None
         self.text_scroller = text.TextScrollerTask(matrix)
+        self.text_scroller.set_text(self.options[0])
         utaskmanager.add_task(self.text_scroller)
 
     def task_step(self):
@@ -32,11 +34,6 @@ class Menu(utaskmanager.Task):
 
         wasd = self.joystick.direction()
         self._handle_input(wasd, self.joystick.btn_pressed())
-        #self.matrix.clear()
-        opt = self.options[self.selected_option]
-        self.text_scroller.set_text(opt)
-        #self.matrix.write_char(opt)
-        #self.matrix.show()
 
     def _handle_input(self, wasd, btn_pressed):
         num_options = len(self.options)
@@ -45,24 +42,33 @@ class Menu(utaskmanager.Task):
         elif wasd == 'd':
             self.selected_option = (self.selected_option - 1) % num_options
 
+        if wasd in ('a', 'd'):
+            opt = self.options[self.selected_option]
+            print(opt, "selected")
+            self.text_scroller.set_text(opt + ' ')
+
         if btn_pressed:
             self._select_current_option()
 
     def _select_current_option(self):
         option = self.options[self.selected_option]
         print("Selected", option)
-        if option == 'S':
+        if option == 'Snake':
             self.text_scroller.pause()
             game = snake.SnakeGame(self.matrix, self.joystick)
             utaskmanager.add_task(game)
             self.current_task = game
 
-        elif option == 'i':
+        elif option == 'net':
             # show ip address
-            #tc = text.TextScroller(self.matrix)
             sta = network.WLAN(network.STA_IF)
-            #tc.scroll_text(" IP: " + sta.ifconfig()[0] + "  ")
-            self.text_scroller.set_text(" IP: " + sta.ifconfig()[0] + "  ")
+            tc = text.TextScroller(self.matrix)
+            tc.scroll_text(" IP: " + sta.ifconfig()[0] + "  ")
+
+        elif option == 'mem':
+            mem_free = gc.mem_free()
+            tc = text.TextScroller(self.matrix)
+            tc.scroll_text("mem free " + str(mem_free) + " Bytes ")
 
 
 def start():
