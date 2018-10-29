@@ -135,8 +135,10 @@ class TextScrollerTask(utaskmanager.Task):
             line = buffer_for_char(ch) + [0x00]
             self.textbuffer.extend(line)
 
+        self.current_index = min(self.current_index, len(self.textbuffer) - 1)
+
     def task_step(self):
-        if self._paused or len(self.textbuffer) == 0:
+        if len(self.textbuffer) == 0:
             return
 
         current_line = self.textbuffer[self.current_index]
