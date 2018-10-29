@@ -9,7 +9,7 @@ class SnakeGame(utaskmanager.Task):
     INIT_SNAKE_DIRECTION = [1, 0]
 
     def __init__(self, matrix, joystick):
-        super().__init__()
+        super().__init__(name='Snake')
         self.matrix = matrix
         self.snake_body = SnakeGame.INIT_SNAKE_BODY
         self.snake_direction = SnakeGame.INIT_SNAKE_DIRECTION
