@@ -1,6 +1,7 @@
 import network
 import gc
 
+import main
 import utaskmanager
 import config
 import snake
@@ -16,7 +17,7 @@ else:
 class Menu(utaskmanager.Task):
     def __init__(self, matrix, jostick):
         super().__init__()
-        self.options = ["Snake", "net", "mem"]
+        self.options = ["Snake", "net", "mem", "demo"]
         self.matrix = matrix
         self.selected_option = 0
         self.joystick = jostick
@@ -70,6 +71,8 @@ class Menu(utaskmanager.Task):
             tc = text.TextScroller(self.matrix)
             tc.scroll_text("mem free " + str(mem_free) + " Bytes ")
 
+        elif option == 'demo':
+            main.run_rotating_plasma()
 
 def start():
     print("Starting firmware...")
