@@ -127,14 +127,6 @@ class TextScrollerTask(utaskmanager.Task):
         self.matrix = matrix
         self.textbuffer = []
         self.current_index = 0
-        self._paused = False
-
-    def pause(self, is_paused):
-        '''
-        set the scroller in paused mode or not. In paused mode, the 
-        display will not be updated
-        '''
-        self._paused = is_paused
 
     def set_text(self, new_text):
         'change the currently shown text.'

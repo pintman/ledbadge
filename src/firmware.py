@@ -28,7 +28,7 @@ class Menu(utaskmanager.Task):
         if self.current_task is not None and self.current_task.task_running:
             return
         else:
-            self.text_scroller.pause(False)
+            self.text_scroller.unpause()
 
         wasd = self.joystick.direction()
         self._handle_input(wasd, self.joystick.btn_pressed())
@@ -48,12 +48,11 @@ class Menu(utaskmanager.Task):
         if btn_pressed:
             self._select_current_option()
 
-
     def _select_current_option(self):
         option = self.options[self.selected_option]
         print("Selected", option)
         if option == 'S':
-            self.text_scroller.pause(True)
+            self.text_scroller.pause()
             game = snake.SnakeGame(self.matrix, self.joystick)
             utaskmanager.add_task(game)
             self.current_task = game

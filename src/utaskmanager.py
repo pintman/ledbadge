@@ -12,7 +12,18 @@ import uasyncio as asyncio
 class Task:
     TASK_SLEEP_TIME_MS = 5
 
-    def __init__(self):
+    def __init__(self, name=''):
+        self.task_running = False
+        self._paused = False
+        self.name = name
+
+    def pause(self):
+        self._paused = True
+
+    def unpause(self):
+        self._paused = False
+
+    def finish(self):
         self.task_running = False
 
     async def start(self):
