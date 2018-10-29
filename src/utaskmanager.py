@@ -48,10 +48,12 @@ def add_task(task):
     loop = asyncio.get_event_loop()
     loop.create_task(task.start())
 
+
 def start():
     'Start the task manager and run forever.'
     loop = asyncio.get_event_loop()
     loop.run_forever()
+
 
 def demo():
     # Create a class that derives from Task and implement the task_step method
@@ -59,7 +61,7 @@ def demo():
         'Demo task that counts between two values'
 
         def __init__(self, start_value=0, end_value=100):
-            super().__init__()  # call __init__ from Task class
+            super().__init__(name='Demo task')  # call __init__ from Task class
 
             # init attributes
             self.counter = start_value
@@ -71,8 +73,7 @@ def demo():
             if self.counter < self.end_value:
                 self.counter += 1
             else:
-                self.task_running = False
-
+                self.finish()
 
     # Add instances of the demo class to the task manager and start it.
     add_task(SampleTaskCounter(start_value=0, end_value=10))

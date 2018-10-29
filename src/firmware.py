@@ -19,7 +19,7 @@ class Menu(utaskmanager.Task):
         self.matrix = matrix
         self.selected_option = 0
         self.joystick = jostick
-        self.current_task= None
+        self.current_task = None
         self.text_scroller = text.TextScrollerTask(matrix)
         utaskmanager.add_task(self.text_scroller)
 
