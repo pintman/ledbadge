@@ -40,6 +40,8 @@ class BadgeNetServer(utaskmanager.Task):
     def __init__(self, ip, port):
         super().__init__()
         # connect to server
+        self.ip = ip
+        self.port = port
         self.clients = []  # list of client ip addresses
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._init_socket()
@@ -57,7 +59,7 @@ class BadgeNetServer(utaskmanager.Task):
 
         if addr not in self.clients:
             print("Registering new client", addr)
-            self.client.append(addr)
+            self.clients.append(addr)
             response = str(len(self.clients)-1)
         else:
             b_data = conn.recv(MAX_PACKET_SIZE)
@@ -97,7 +99,6 @@ def start_server():
 
     bns = BadgeNetServer(SERVER_IP, SERVER_PORT)
     utaskmanager.add_task(bns)
-
 
 
 def start():
