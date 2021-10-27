@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ledbadge"
+version = "0.1.0"
+description = "Simple Badge based on the Wemos-D1-Mini"
+authors = ["Marco Bakera <marco@bakera.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pygame = "^2.0.2"
+
+[tool.poetry.dev-dependencies]
+esptool = "^3.2"
+adafruit-ampy = "^1.1.0"
+pylint = "^2.11.1"
+jupyter = "^1.0.0"
+mpy-cross = "^1.17"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

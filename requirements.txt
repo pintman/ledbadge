@@ -1,4 +1,0 @@
-esptool
-adafruit-ampy
-mpy-cross
-pygame
